@@ -1,0 +1,55 @@
+SQL> @shx26-query-oracle.sql
+
+NAME                                                                            
+------------------------------                                                  
+Pennsylvania Forest                                                             
+
+
+no rows selected
+
+
+NAME                                                                            
+------------------------------                                                  
+FORBES                                                                          
+BIGELOW                                                                         
+
+
+ SENSOR_ID NAME                                                                 
+---------- ------------------------------                                       
+         2 John                                                                 
+         1 John                                                                 
+         5 Jason                                                                
+         3 Jason                                                                
+         4                                                                      
+
+
+LE GR                                                                           
+-- --                                                                           
+OH PA                                                                           
+OH PA                                                                           
+
+
+NAME                           COUNT(R.SENSOR_ID)   AVG_TEMP                    
+------------------------------ ------------------ ----------                    
+Allegheny National Forest                       5       53.8                    
+Pennsylvania Forest                             3 38.3333333                    
+
+
+         X          Y                                                           
+---------- ----------                                                           
+       200        400                                                           
+
+
+no rows selected
+
+
+ST                                                                              
+--                                                                              
+PA                                                                              
+
+
+NAME                                                                            
+------------------------------                                                  
+Pennsylvania Forest                                                             
+
+SQL> spool off

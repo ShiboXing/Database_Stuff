@@ -1,0 +1,55 @@
+        name         
+---------------------
+ Pennsylvania Forest
+(1 row)
+
+ name 
+------
+(0 rows)
+
+  name   
+---------
+ FORBES
+ BIGELOW
+(2 rows)
+
+ sensor_id | name  
+-----------+-------
+         1 | John
+         2 | John
+         3 | Jason
+         4 | 
+         5 | Jason
+(5 rows)
+
+ least | greatest 
+-------+----------
+ OH    | PA
+ OH    | PA
+(2 rows)
+
+           name            | count |     avg_temp     
+---------------------------+-------+------------------
+ Allegheny National Forest |     5 |             53.8
+ Pennsylvania Forest       |     3 | 38.3333333333333
+(2 rows)
+
+  x  |  y  
+-----+-----
+ 200 | 400
+(1 row)
+
+ state 
+-------
+(0 rows)
+
+ state 
+-------
+ PA
+(1 row)
+
+        name         
+---------------------
+ Pennsylvania Forest
+(1 row)
+
