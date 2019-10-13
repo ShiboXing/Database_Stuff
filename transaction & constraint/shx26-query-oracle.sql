@@ -1,5 +1,6 @@
 --Shibo Xing
 --shx26
+
 /*
 select * from coverage;
 select * from forest;
@@ -10,15 +11,16 @@ select * from sensor;
 select * from state;
 select * from worker;
 */
+
 --3a
-select S.sensor_id from sensor as S join report as R
+select S.sensor_id from sensor S join report R
 on S.sensor_id = R.sensor_id
 group by S.sensor_id
 order by count(R.sensor_id) desc
-limit 3;
+fetch first 3 rows only;
 
 --3b
-select S.sensor_id from sensor as S join report as R
+select S.sensor_id from sensor S join report R
 on S.sensor_id = R.sensor_id
 group by S.sensor_id
 order by count(R.sensor_id) desc
@@ -26,10 +28,10 @@ offset 3 row
 fetch next 2 rows only;
 
 --4a
-drop view if exists DUTIES cascade;
-create view DUTIES (name,cnt)
-as select w.name n,count(sensor_id) c from sensor join worker w on sensor.maintainer = w.ssn
-group by n;
+create view DUTIES (D_name,D_cnt)
+as select name,count(sensor_id) from sensor join WORKER on SENSOR.MAINTAINER = WORKER.SSN
+group by name;
+
 
 
 --4b
@@ -41,6 +43,7 @@ as select * from DUTIES;
 create or replace view FOREST_SENSOR (fs_forest_no,fs_name,fs_sensor_id)
 as select forest_no,f.name,s.sensor_id from forest f, sensor s
 where s.x between f.mbr_xmin and f.mbr_xmax and s.y between f.mbr_ymin and f.mbr_ymax;
+
 
 INSERT INTO WORKER values ('20','Name20',27,5);
 INSERT INTO WORKER values ('21','Name21',32,9);
@@ -2044,11 +2047,13 @@ INSERT INTO SENSOR values (1018, 2830,1788,to_timestamp('6-JUL-2019 0:00:00','DD
 INSERT INTO SENSOR values (1019, 1098,3120,to_timestamp('7-AUG-2019 14:00:00','DD-MON-YYYY HH24:MI:SS'),10,'1019');
 
 --question 5: after running the extra data sql
-refresh materialized view duties_mv;
+begin
+    DBMS_MVIEW.REFRESH('DUTIES_MV');
+end;
 
 --5a
-select name from DUTIES
-where cnt = (select max(cnt) from DUTIES);
+select D_name from DUTIES
+where D_cnt in (select max(D_cnt) from DUTIES);
 
 
 --5b
@@ -2059,12 +2064,17 @@ where fs_sensor_id not in (select sensor_id
     and to_timestamp('11-AUG-2019 00:00:00', 'DD-MON-YYYY HH24:MI:SS'));
 
 --5a_mv
-select name from DUTIES_MV
-where cnt = (select max(cnt) from DUTIES_MV);
+select D_name from DUTIES_MV
+where D_cnt in (select max(D_cnt) from DUTIES_MV);
 
 --5d
-    --5a (using view): 21.604 ms
-    --5a_mv(using materialized view): 4.207 ms
+    --5a (using view): 3 ms
+    --5a_mv(using materialized view): 0 ms
+
+--clean up
+drop view DUTIES cascade constraints;
+drop materialized view DUTIES_MV;
+
 
 
 

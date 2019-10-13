@@ -1,47 +1,3 @@
---Shibo Xing
---shx26
-/*
-select * from coverage;
-select * from forest;
-select * from intersection;
-select * from report;
-select * from road;
-select * from sensor;
-select * from state;
-select * from worker;
-*/
---3a
-select S.sensor_id from sensor as S join report as R
-on S.sensor_id = R.sensor_id
-group by S.sensor_id
-order by count(R.sensor_id) desc
-limit 3;
-
---3b
-select S.sensor_id from sensor as S join report as R
-on S.sensor_id = R.sensor_id
-group by S.sensor_id
-order by count(R.sensor_id) desc
-offset 3 row
-fetch next 2 rows only;
-
---4a
-drop view if exists DUTIES cascade;
-create view DUTIES (name,cnt)
-as select w.name n,count(sensor_id) c from sensor join worker w on sensor.maintainer = w.ssn
-group by n;
-
-
---4b
-create materialized view DUTIES_MV
-as select * from DUTIES;
-
-
---4c
-create or replace view FOREST_SENSOR (fs_forest_no,fs_name,fs_sensor_id)
-as select forest_no,f.name,s.sensor_id from forest f, sensor s
-where s.x between f.mbr_xmin and f.mbr_xmax and s.y between f.mbr_ymin and f.mbr_ymax;
-
 INSERT INTO WORKER values ('20','Name20',27,5);
 INSERT INTO WORKER values ('21','Name21',32,9);
 INSERT INTO WORKER values ('22','Name22',28,3);
@@ -2042,29 +1998,3 @@ INSERT INTO SENSOR values (1016, 2442,7342,to_timestamp('24-FEB-2019 21:00:00','
 INSERT INTO SENSOR values (1017, 1843,5564,to_timestamp('10-JUN-2019 11:00:00','DD-MON-YYYY HH24:MI:SS'),2,'1017');
 INSERT INTO SENSOR values (1018, 2830,1788,to_timestamp('6-JUL-2019 0:00:00','DD-MON-YYYY HH24:MI:SS'),6,'1018');
 INSERT INTO SENSOR values (1019, 1098,3120,to_timestamp('7-AUG-2019 14:00:00','DD-MON-YYYY HH24:MI:SS'),10,'1019');
-
---question 5: after running the extra data sql
-refresh materialized view duties_mv;
-
---5a
-select name from DUTIES
-where cnt = (select max(cnt) from DUTIES);
-
-
---5b
-select distinct fs_name from FOREST_SENSOR
-where fs_sensor_id not in (select sensor_id
-    from sensor s natural join report f
-    where f.report_time between to_timestamp('10-AUG-2019 00:00:00', 'DD-MON-YYYY HH24:MI:SS')
-    and to_timestamp('11-AUG-2019 00:00:00', 'DD-MON-YYYY HH24:MI:SS'));
-
---5a_mv
-select name from DUTIES_MV
-where cnt = (select max(cnt) from DUTIES_MV);
-
---5d
-    --5a (using view): 21.604 ms
-    --5a_mv(using materialized view): 4.207 ms
-
-
-
