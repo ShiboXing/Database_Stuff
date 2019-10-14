@@ -3,6 +3,7 @@
 ----ASSIGNMENT #6: SQL/PL: FUNCTIONS, PROCEDURES, AND TRIGGERS
 
 --Clean up
+
 drop table report cascade constraints;
 drop table coverage cascade constraints;
 drop table intersection cascade constraints;
