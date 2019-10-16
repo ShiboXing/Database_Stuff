@@ -156,7 +156,7 @@ declare
   totalBalance numeric(15, 2);
   totalLoan    numeric(15, 2);
 begin
-  select sum(balance) into totalBalance
+  select sum(balance) into totalBalcance
   from account;
   select sum(amount) into totalLoan
   from loan;
