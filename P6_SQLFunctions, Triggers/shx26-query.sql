@@ -1,3 +1,6 @@
+--Shibo Xing
+--shx26
+
 --1a
  create or replace procedure proUpdateLastRead(input_sensor_id int, read_time timestamp)
      language plpgsql
