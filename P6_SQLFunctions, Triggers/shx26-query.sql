@@ -5,13 +5,13 @@
  create or replace procedure proUpdateLastRead(input_sensor_id int, read_time timestamp)
      language plpgsql
  as
-     $$
+    $$
      begin
          update sensor
          set last_read=read_time
          where sensor_id=input_sensor_id;
      end
-     $$;
+    $$;
 
 --1b
  create or replace function fun_Compute_Percentage(input_forest_no varchar(10), area_covered float)
