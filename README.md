@@ -5,4 +5,4 @@
 ##### P4: DDL exercise
 ##### P5: DML exercise
 ##### P6: SQL function, triggers 
-##### JDBC project: [Pitt-Social](https://github.com/ShiboXing/Pitt-Social)
+##### JDBC project: [Pitt-Social](https://github.com/ShiboXing/Pitt-Social) (private for now)
