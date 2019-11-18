@@ -1,3 +1,3 @@
 # Database_Stuff
-
-a collection of the projects related to database
+###### cs 1550
+###### a collection of the postgresql and oracle sql practice
