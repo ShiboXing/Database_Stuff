@@ -1,4 +1,4 @@
-
+-- part 1
 -- assume pittID is unique, every personnel has a fname and lname
 create table tech_personnel(
     pplSoft int not null,
@@ -84,8 +84,19 @@ create table assignment (
     status varchar2(10) not null,
     outcome varchar2(20) not null,
     constraint assignment_pk primary key (ticket_number) deferrable,
-    constraint assignment_fk foreign key (tech_pplSoft) references tech_personnel(tech_pplSoft) initially deferrable deferrable
+    constraint assignment_fk foreign key (tech_pplSoft) references tech_personnel(tech_pplSoft) initially deferred deferrable
 );
+
+-- 2.a
+alter table tickets
+    modify days_worked_on default 0;
+-- 2.b
+alter table tickets
+    add constraint tickets_check check ( days_worked_on >= 0 ) initially immediate deferrable;
+-- 2.c
+alter table tech_personnel
+    add super_pplSoft;
+
 
 
 drop table tech_personnel;
