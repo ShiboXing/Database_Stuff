@@ -1,4 +1,7 @@
+--Shibo Xing
+--shx26
 
+commit;
 drop table tech_personnel cascade constraints;
 drop table assignment cascade constraints;
 drop table users cascade constraints;
@@ -116,6 +119,8 @@ alter table tech_personnel
 alter table user_office
     add pplSoft int
     add constraint fk_user_office foreign key (pplSoft) references users (pplSoft) not deferrable;
+
+-- TODO: ask if primary should pplSoft and office_no
 -- alter table user_office
 --     drop constraint user_office_pk;
 -- alter table user_office
