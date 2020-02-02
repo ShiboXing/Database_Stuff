@@ -14,7 +14,7 @@ from (
 order by cnt desc;
 
 --4.b
---Todo: ask if cnt needs to be greater than all other cnts
+-- return the personnels with most tickets resolve count
 select fn, ln, cnt from
     (
         select fname fn, lname ln, PPLSOFT, count(PPLSOFT) cnt

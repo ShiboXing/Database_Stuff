@@ -120,7 +120,7 @@ alter table user_office
     add pplSoft int
     add constraint fk_user_office foreign key (pplSoft) references users (pplSoft) not deferrable;
 
--- TODO: ask if primary should pplSoft and office_no
+-- TODO: fix primary key, (pplsoft, office_no, building)
 -- alter table user_office
 --     drop constraint user_office_pk;
 -- alter table user_office
