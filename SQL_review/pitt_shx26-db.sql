@@ -1,3 +1,4 @@
+set transaction name 'create schemas';
 -- part 1
 -- assume pittID is unique, every personnel has a fname and lname
 create table tech_personnel(
@@ -8,8 +9,7 @@ create table tech_personnel(
     expertise varchar2(10),
     office_phone int,
     constraint tech_personnel_pk primary key (pplSoft) deferrable,
-    constraint tech_personnel_unique unique(pittID) initially immediate deferrable,
-    constraint tech_personnel_fk foreign key(office_phone) references user_office(office_phone) initially deferred deferrable
+    constraint tech_personnel_unique unique(pittID) initially immediate deferrable
 );
 
 -- assume pittID is unique, every user has a fname and lname
@@ -84,28 +84,34 @@ create table assignment (
     status varchar2(10) not null,
     outcome varchar2(20) not null,
     constraint assignment_pk primary key (ticket_number) deferrable,
-    constraint assignment_fk foreign key (tech_pplSoft) references tech_personnel(tech_pplSoft) initially deferred deferrable
+    constraint assignment_fk foreign key (tech_pplSoft) references users(pplSoft) initially deferred deferrable
 );
+
+alter table tech_personnel
+    add constraint tech_personnel_fk1 foreign key (pplSoft) references users(pplSoft) initially deferred deferrable;
+
+commit;
 
 -- 2.a
 alter table tickets
     modify days_worked_on default 0;
 -- 2.b
 alter table tickets
-    add constraint tickets_check check ( days_worked_on >= 0 ) initially immediate deferrable;
+    add constraint tickets_check check (days_worked_on >= 0 ) initially immediate deferrable;
 -- 2.c
 alter table tech_personnel
-    add super_pplSoft;
+    add super_pplSoft not null;
+alter table tech_personnel
+    add constraint tech_personnel_fk2 foreign key (super_pplSoft) references users(pplSoft) initially deferred deferrable;
 
 
-
-drop table tech_personnel;
-drop table user_office;
-drop table categories;
-drop table inventory;
-drop table locations;
-drop table tickets;
-drop table assignment;
-
+drop table tech_personnel cascade constraints;
+drop table assignment cascade constraints;
+drop table users cascade constraints;
+drop table user_office cascade constraints;
+drop table categories cascade constraints;
+drop table inventory cascade constraints;
+drop table locations cascade constraints;
+drop table tickets cascade constraints;
 
 
