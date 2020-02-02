@@ -100,6 +100,7 @@ create table assignment (
 alter table inventory
     add constraint inventory_fk1 foreign key (location_id) references locations(location_id) initially deferred deferrable;
 
+commit;
 
 -- 2.a
 alter table tickets
@@ -111,5 +112,17 @@ alter table tickets
 alter table tech_personnel
     add super_pplSoft int default 1110001 not null
     add constraint tech_personnel_fk2 foreign key (super_pplSoft) references tech_personnel(pplSoft) initially deferred deferrable;
+-- 2.d
+alter table user_office
+    add pplSoft int
+    add constraint fk_user_office foreign key (pplSoft) references users (pplSoft) not deferrable;
+-- alter table user_office
+--     drop constraint user_office_pk;
+-- alter table user_office
+--     add constraint user_office_pk primary key (office_no, pplSoft) deferrable;
+-- 2.e
+alter table user_office
+    drop constraint fk_user_office;
+alter table user_office
+    add constraint fk_user_office foreign key (pplSoft) references users (pplSoft) deferrable;
 
-commit;
