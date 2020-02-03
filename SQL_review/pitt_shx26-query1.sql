@@ -1,6 +1,11 @@
 --Shibo Xing
 --shx26
 
+set linesize 100;
+set pagesize 2000;
+set sqlblanklines on;
+alter session set nls_date_format = 'YYYY-MM-DD HH24:MI:SS';
+
 -- Question #4:
 commit;
 --4.a
@@ -38,21 +43,21 @@ select machine_name from
     (
         select machine_name, count(MACHINE_NAME) cnt
         from tickets
-        where DATE_SUBMITTED between to_date('2015-11-30','yyyy-mm-dd') and to_date('2016-02-01','yyyy-mm-dd')
+        where DATE_SUBMITTED between to_date('2015-11-30') and to_date('2016-02-01')
         group by machine_name
     )
 where cnt =
     (
         select max(count(MACHINE_NAME)) max_cnt
         from tickets
-        where DATE_SUBMITTED between to_date('2015-11-30','yyyy-mm-dd') and to_date('2016-02-01','yyyy-mm-dd')
+        where DATE_SUBMITTED between to_date('2015-11-30') and to_date('2016-02-01')
         group by machine_name
     );
 
 --4.d
 select count(MACHINE_NAME)/31 avg_cnt
 from tickets
-where DATE_SUBMITTED between to_date('2015-12-31','yyyy-mm-dd') and to_date('2016-02-01','yyyy-mm-dd');
+where DATE_SUBMITTED between to_date('2015-12-31') and to_date('2016-02-01');
 
 --4.e
 
