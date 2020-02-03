@@ -60,6 +60,11 @@ from tickets
 where DATE_SUBMITTED between to_date('2015-12-31') and to_date('2016-02-01');
 
 --4.e
+select owner_pplsoft, sum(days_worked_on) as s
+from tickets
+where date_closed between to_date('2016-01-01') and to_date('2016-01-31')
+group by owner_pplsoft
+order by s asc;
 
 
 
