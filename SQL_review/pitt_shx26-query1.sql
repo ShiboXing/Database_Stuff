@@ -66,7 +66,11 @@ where date_closed between to_date('2016-01-01') and to_date('2016-01-31')
 group by owner_pplsoft
 order by s asc;
 
-
-
-
-
+--4.f
+-- week (1-52), start date, end date, number of successfully closed tickets
+-- weekly between 2015/01/01 and 2015/12/31, sorted by descending week
+select to_char(date_submitted, 'ww') as week, min(date_submitted) as start_date, max(date_closed) as end_date, count(*)
+from tickets
+where date_closed is not null and date_submitted between to_date('2015-01-01') and to_date('2015-12-31')
+group by to_char(date_submitted, 'ww')
+order by week desc;
