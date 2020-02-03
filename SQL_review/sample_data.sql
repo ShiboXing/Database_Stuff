@@ -57,8 +57,10 @@ INSERT INTO TICKETS values(000000567853,5550003,'15-Jan-16','21-Jan-16',7,12,'ka
 INSERT INTO TICKETS values(000000567854,5550001,'16-Jan-16','17-Jan-16',2,6,'acta.cs.pitt.edu','I have trouble configuring Outlook.');
 INSERT INTO TICKETS values(000000567855,5550003,'20-Jan-16',NULL,NULL,3,'kaso.cs.pitt.edu','Windows crashed!');
 INSERT INTO TICKETS values(000000567856,5550004,'25-Jan-16',NULL,NULL,8,'java lab machine','Can not submit my h/w using the submission site.');
--- INSERT INTO TICKETS values(000000567857,5550004,'25-Jan-17',NULL,NULL,8,'java lab machine','Can not submit my h/w using the submission site.');
--- INSERT INTO TICKETS values(000000567858,5550004,'10-Jan-16',NULL,NULL,8,'java lab machine','Can not submit my h/w using the submission site.');
+
+--for testing
+-- INSERT INTO TICKETS values(000000567857,5550004,'5-Jan-15','7-Jan-15',NULL,8,'java lab machine','Can not submit my h/w using the submission site.');
+-- INSERT INTO TICKETS values(000000567858,5550004,'4-Jan-15','5-Jan-15',NULL,8,'java lab machine','Can not submit my h/w using the submission site.');
 
 INSERT INTO ASSIGNMENT values(000000567841,1110001,'20-DEC-15','delegated', null);
 INSERT INTO ASSIGNMENT values(000000567841,1110002,'24-DEC-15','closed_successful', null);
