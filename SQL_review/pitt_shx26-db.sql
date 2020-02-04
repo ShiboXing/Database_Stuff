@@ -1,6 +1,5 @@
 --Shibo Xing
 --shx26
-
 commit;
 drop table tech_personnel cascade constraints;
 drop table assignment cascade constraints;
@@ -129,5 +128,4 @@ alter table user_office
     drop constraint fk_user_office;
 alter table user_office
     add constraint fk_user_office foreign key (pplSoft) references users (pplSoft) deferrable;
-
 commit;

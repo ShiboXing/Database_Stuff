@@ -1,3 +1,4 @@
+
 ----------------------------------------
 --- Sample Data  ---
 ----------------------------------------
@@ -58,18 +59,6 @@ INSERT INTO TICKETS values(000000567854,5550001,'16-Jan-16','17-Jan-16',2,6,'act
 INSERT INTO TICKETS values(000000567855,5550003,'20-Jan-16',NULL,NULL,3,'kaso.cs.pitt.edu','Windows crashed!');
 INSERT INTO TICKETS values(000000567856,5550004,'25-Jan-16',NULL,NULL,8,'java lab machine','Can not submit my h/w using the submission site.');
 
---for testing
--- INSERT INTO TICKETS values(000000567857,5550004,'5-Jan-15','7-Jan-15',NULL,8,'java lab machine','Can not submit my h/w using the submission site.');
--- INSERT INTO TICKETS values(000000567858,5550004,'4-Jan-15','5-Jan-15',NULL,8,'java lab machine','Can not submit my h/w using the submission site.');
--- INSERT INTO TICKETS values(000000567869,5550004,'4-Jan-16','9-Jan-16',5,8,'java lab machine','Can not submit my h/w using the submission site.');
--- INSERT INTO TICKETS values(000000567870,5550002,'20-DEC-15','22-DEC-15',3,1, 'kaly.cs.pitt.edu',  'Can not print any PDF file! (2)');
--- INSERT INTO TICKETS values(000000567871,5550002,'02-Jan-16','02-Jan-16',1,2,'oxgyn.cs.pitt.edu',  'can not connect to the oxgyn server!');
--- INSERT INTO TICKETS values(000000567872,5550002,'02-Jan-16','02-Jan-16',1,2,'oxgyn.cs.pitt.edu',  'can not connect to the oxgyn server!');
--- INSERT INTO TICKETS values(000000567873,5550002,'23-DEC-15',NULL,    NULL,6,'elements.cs.pitt.edu',  'Seems that the server is down?!');
--- INSERT INTO TICKETS values(000000567874,5550002,'23-DEC-15',NULL,    NULL,6,'elements.cs.pitt.edu',  'Seems that the server is down?!');
--- INSERT INTO TICKETS values(000000567875,5550002,'23-DEC-15',NULL,    NULL,6,'elements.cs.pitt.edu',  'Seems that the server is down?!');
--- INSERT INTO TICKETS values(000000567876,5550002,'23-DEC-15',NULL,    NULL,6,'elements.cs.pitt.edu',  'Seems that the server is down?!');
-
 INSERT INTO ASSIGNMENT values(000000567841,1110001,'20-DEC-15','delegated', null);
 INSERT INTO ASSIGNMENT values(000000567841,1110002,'24-DEC-15','closed_successful', null);
 INSERT INTO ASSIGNMENT values(000000567842,1110002,'20-DEC-15','closed_successful', null);
@@ -91,8 +80,5 @@ INSERT INTO ASSIGNMENT values(000000567854,1110001,'16-Jan-16','closed_successfu
 INSERT INTO ASSIGNMENT values(000000567855,1110001,'20-Jan-16','assigned', null);
 INSERT INTO ASSIGNMENT values(000000567856,1110003,'25-Jan-16','delegated', null);
 INSERT INTO ASSIGNMENT values(000000567856,1110004,'27-Jan-16','assigned', null);
-
---for testing
--- insert into assignment values(000000567869, 1110004,'4-Jan-16','closed_successful', null);
 
 commit;

@@ -160,11 +160,11 @@ begin
     where ticket_number = :new.ticket_number;
 end;
 /
-
-update assignment
-set status = 'closed_successful'
-where ticket_number = 000000567856;
-select * from tickets;
+--
+-- update assignment
+-- set status = 'closed_successful'
+-- where ticket_number = 000000567856;
+-- select * from tickets;
 
 --7.b
 create or replace trigger WorkedDays
@@ -179,3 +179,10 @@ begin
     where tickets.ticket_number = :new.ticket_number;
 end;
 /
+--
+-- update assignment
+-- set status = 'closed_successful'
+-- where ticket_number = 000000567852;
+-- select * from assignment;
+-- select * from tickets;
+
