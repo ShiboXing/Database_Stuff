@@ -102,10 +102,55 @@ create or replace view ProblematicMachine as
          )
     join INVENTORY on mn = INVENTORY.MACHINE_NAME
     where cnt > 3;
-
 select * from ProblematicMachine;
 
 --5.c
+create or replace view TechPerformance as
+    select TECH_PPLSOFT, count(TICKET_NUMBER) tk_count
+    from assignment
+    where status = 'closed_successful'
+    group by TECH_PPLSOFT
+    order by tk_count desc;
+select * from TechPerformance;
+
+--6.a
+select mn
+from
+    (
+        select TICKETS.MACHINE_NAME mn, count(TICKET_NUMBER) cnt
+        from TICKETS join INVENTORY on TICKETS.MACHINE_NAME = INVENTORY.MACHINE_NAME
+                     join LOCATIONS on INVENTORY.LOCATION_ID = LOCATIONS.LOCATION_ID
+        where LOCATION = '5th floor'
+        group by TICKETS.MACHINE_NAME
+    )
+where cnt =
+    (
+        select max(count(TICKET_NUMBER)) max_cnt
+        from TICKETS join INVENTORY on TICKETS.MACHINE_NAME = INVENTORY.MACHINE_NAME
+                     join LOCATIONS on INVENTORY.LOCATION_ID = LOCATIONS.LOCATION_ID
+        where LOCATION = '5th floor'
+        group by TICKETS.MACHINE_NAME
+    );
+
+--6.b
+select day_of_week, ticket_count
+from
+     (
+        select to_char(date_submitted, 'D') day_of_week, count(ticket_number) ticket_count
+        from tickets
+        where date_submitted between to_date('2015-12-01','yyyy/mm/dd') and to_date('2015-12-31','yyyy/mm/dd')
+        group by to_char(date_submitted, 'D')
+     )
+where ticket_count  =
+     (
+        select max(count(ticket_number)) ticket_count
+        from tickets
+        where date_submitted between to_date('2015-12-01','yyyy/mm/dd') and to_date('2015-12-31','yyyy/mm/dd')
+        group by to_char(date_submitted, 'D')
+     );
+
+--6.7
+
 
 
 
