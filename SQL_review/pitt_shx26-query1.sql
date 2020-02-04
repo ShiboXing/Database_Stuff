@@ -149,10 +149,33 @@ where ticket_count  =
         group by to_char(date_submitted, 'D')
      );
 
---6.7
+--7.a
+create or replace trigger ClosedTicket
+    after update on assignment
+    for each row
+    when(new.status = 'closed_successful' or new.status = 'closed_unsuccessful')
+begin
+    update tickets
+    set date_closed = current_date
+    where ticket_number = :new.ticket_number;
+end;
+/
 
+update assignment
+set status = 'closed_successful'
+where ticket_number = 000000567856;
+select * from tickets;
 
-
-
-
-
+--7.b
+create or replace trigger WorkedDays
+    before update on assignment
+    for each row
+    when(new.status = 'closed_successful'
+             or new.status = 'closed_unsuccessful'
+             or new.status = 'delegated')
+begin
+    update tickets
+    set days_worked_on = current_date - to_date(to_char(date_submitted, 'yyyy-mm-dd'), 'yyyy-mm-dd')
+    where tickets.ticket_number = :new.ticket_number;
+end;
+/
