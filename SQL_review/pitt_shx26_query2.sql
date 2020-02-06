@@ -24,9 +24,11 @@ create materialized view MV_WORKING_TICKETS
 -- 9.c
 select count(*) from working_tickets
 where STATUS = 'closed_successful';
-
 select count(*) from mv_working_tickets
 where STATUS = 'closed_successful';
+
+--9.d
+
 
 
 

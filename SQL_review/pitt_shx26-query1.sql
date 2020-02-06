@@ -75,8 +75,10 @@ order by days asc;
 select to_char(date_submitted, 'ww') as week,
        min(DATE_SUBMITTED) - to_char(min(DATE_SUBMITTED), 'D') + 1 start_date,
        min(DATE_SUBMITTED) - to_char(min(DATE_SUBMITTED), 'D') + 7 end_date, count(*)
-from tickets
-where date_closed is not null and date_submitted between to_date('2015-01-01','yyyy/mm/dd') and to_date('2015-12-31','yyyy/mm/dd')
+from tickets join ASSIGNMENT on TICKETS.TICKET_NUMBER = ASSIGNMENT.TICKET_NUMBER
+where date_closed is not null
+      and date_submitted between to_date('2015-01-01','yyyy/mm/dd') and to_date('2015-12-31','yyyy/mm/dd')
+      and status = 'closed_successful'
 group by to_char(date_submitted, 'ww')
 order by week desc;
 
