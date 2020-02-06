@@ -16,6 +16,7 @@ from (
                   join tickets on USERS.PPLSOFT = TICKETS.OWNER_PPLSOFT
          group by fname, lname, OFFICE_PHONE, PPLSOFT
      )
+where cnt > 3
 order by cnt desc;
 
 
@@ -25,7 +26,8 @@ select fn, ln, cnt from
     (
         select fname fn, lname ln, PPLSOFT, count(PPLSOFT) cnt
         from TECH_PERSONNEL join ASSIGNMENT on TECH_PERSONNEL.PPLSOFT = ASSIGNMENT.TECH_PPLSOFT
-        where status = 'closed_successful'
+                            join TICKETS on TICKETS.TICKET_NUMBER = ASSIGNMENT.TICKET_NUMBER
+        where DATE_CLOSED is not null
         group by fname, lname, PPLSOFT
     )
 where
@@ -34,7 +36,8 @@ where
             (
                 select max(count(PPLSOFT)) cnt
                 from TECH_PERSONNEL join ASSIGNMENT on TECH_PERSONNEL.PPLSOFT = ASSIGNMENT.TECH_PPLSOFT
-                where status = 'closed_successful'
+                join TICKETS on TICKETS.TICKET_NUMBER = ASSIGNMENT.TICKET_NUMBER
+                where DATE_CLOSED is not null
                 group by fname, lname, PPLSOFT
             )
     );
@@ -56,7 +59,7 @@ where cnt =
     );
 
 --4.d
-select count(MACHINE_NAME)/31 avg_cnt
+select sum(DAYS_WORKED_ON) / 31 avg_day
 from tickets
 where DATE_SUBMITTED between to_date('2016-01-01','yyyy/mm/dd') and to_date('2016-01-31','yyyy/mm/dd');
 
@@ -108,7 +111,7 @@ select * from ProblematicMachine;
 create or replace view TechPerformance as
     select TECH_PPLSOFT, count(TICKET_NUMBER) tk_count
     from assignment
-    where status = 'closed_successful'
+    where status = 'closed_successful' or STATUS = 'closed_unsuccesful' or STATUS = 'delegated'
     group by TECH_PPLSOFT
     order by tk_count desc;
 select * from TechPerformance;
