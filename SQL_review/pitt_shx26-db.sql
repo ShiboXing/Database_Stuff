@@ -1,14 +1,15 @@
---Shibo Xing
---shx26
--- commit;
--- drop table tech_personnel cascade constraints;
--- drop table assignment cascade constraints;
--- drop table users cascade constraints;
--- drop table user_office cascade constraints;
--- drop table categories cascade constraints;
--- drop table inventory cascade constraints;
--- drop table locations cascade constraints;
--- drop table tickets cascade constraints;
+--Shibo Xing, Paul Elder
+--shx26, pye1
+
+commit;
+drop table tech_personnel cascade constraints;
+drop table assignment cascade constraints;
+drop table users cascade constraints;
+drop table user_office cascade constraints;
+drop table categories cascade constraints;
+drop table inventory cascade constraints;
+drop table locations cascade constraints;
+drop table tickets cascade constraints;
 commit;
 
 -- Question #1:
