@@ -2192,4 +2192,22 @@ Materialized view created.
 ----------                                                                      
         11                                                                      
 
+SQL> @time_9d.sql
+
+  COUNT(*)
+----------
+	12
+
+Elapsed: 00:00:00.00
+
+  COUNT(*)
+----------
+	12
+
+Elapsed: 00:00:00.00
+
 SQL> spool off
+
+
+The time execution difference between the two queries are neglible, as
+the table size is too small.
