@@ -26,8 +26,7 @@ select fn, ln, cnt from
     (
         select fname fn, lname ln, PPLSOFT, count(PPLSOFT) cnt
         from TECH_PERSONNEL join ASSIGNMENT on TECH_PERSONNEL.PPLSOFT = ASSIGNMENT.TECH_PPLSOFT
-                            join TICKETS on TICKETS.TICKET_NUMBER = ASSIGNMENT.TICKET_NUMBER
-        where DATE_CLOSED is not null
+        where status = 'closed_successful' or STATUS = 'closed_unsuccesful' or STATUS = 'delegated'
         group by fname, lname, PPLSOFT
     )
 where
@@ -36,8 +35,7 @@ where
             (
                 select max(count(PPLSOFT)) cnt
                 from TECH_PERSONNEL join ASSIGNMENT on TECH_PERSONNEL.PPLSOFT = ASSIGNMENT.TECH_PPLSOFT
-                join TICKETS on TICKETS.TICKET_NUMBER = ASSIGNMENT.TICKET_NUMBER
-                where DATE_CLOSED is not null
+                where status = 'closed_successful' or STATUS = 'closed_unsuccesful' or STATUS = 'delegated'
                 group by fname, lname, PPLSOFT
             )
     );
