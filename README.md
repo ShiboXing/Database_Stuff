@@ -6,3 +6,4 @@
 #### P5: DML exercise
 #### P6: SQL function, triggers 
 #### JDBC project: [Pitt-Social](https://github.com/ShiboXing/Pitt-Social)
+#### DBMS project: [cs-2550-project](https://github.com/Rahi374/cs-2550-project)
